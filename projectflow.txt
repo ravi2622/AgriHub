@@ -1,0 +1,19 @@
+-> footer
+
+=> navbar 
+-> add cart
+-> login singUp Schema
+-> profile section
+   -> farmer
+        -> add listing delete listing section
+        -> profile mange
+        -> contect section
+        -> order mangement section
+   -> cansumer
+-> direct access from navbar
+
+=> listing
+    -> individual listing 
+    -> show list
+        -> edit
+        -> add to cart

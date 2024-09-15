@@ -1,0 +1,145 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  header {
+    width: 100%;
+    background-color: rgb(240 244 240) !important; /* Light green background */
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(240 244 240) !important; /* Light green background */
+    /* display: flex;/ */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    height: 100vh;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Container Styles */
+  .container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    padding: 2rem;
+    align-items: center;
+    width: 100%;
+    background-color: #cdeacd;
+  }
+  
+  .form-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    height: 80vh;
+    overflow-y: scroll;
+  }
+
+  .form-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #2d572c; /* Dark green color for headings */
+    margin-bottom: 20px;
+  }
+  
+  /* Form Styles */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #2d572c;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9fff9; /* Very light green input background */
+    transition: border-color 0.3s;
+  }
+  
+  .form-group input:focus {
+    border-color: #2d572c;
+    outline: none;
+  }
+
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9fff9; /* Very light green input background */
+    transition: border-color 0.3s;
+  }
+  
+  .form-group select:focus {
+    border-color: #2d572c;
+    outline: none;
+  }
+  
+  /* Password Container */
+  .password-container {
+    position: relative;
+  }
+  
+  .password-container input {
+    width: calc(100% - 50px); /* Adjust width to make room for show/hide button */
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #2d572c;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .toggle-password:focus {
+    outline: none;
+  }
+  
+  /* Submit Button */
+  .submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50; /* Light green */
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .submit-btn:hover {
+    background-color: #388e3c; /* Darker green on hover */
+  }
+  

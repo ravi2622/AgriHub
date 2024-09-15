@@ -1,0 +1,142 @@
+/* Resetting some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Verdana", sans-serif;
+    color: #040404;
+    background-color: #f4f4f4;
+  }
+  
+  .community-section {
+    padding: 50px 0;
+    margin: 0 auto; /* Centering section */
+  }
+  
+  .head {
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid black;
+    /* box-shadow: 0 8px 10px rgba(0, 0, 0, 0.4); */
+    background-color: white; /* Added background for contrast */
+  }
+  
+  .head:hover {
+    /* box-shadow: 0 8px 12px rgba(255, 255, 255, 0.5); */
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: black;
+    margin-bottom: 30px;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .support-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    gap: 20px; /* Added gap for spacing */
+  }
+  
+  .info-box {
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    border: 1px solid black;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8); */
+    background-color: white; /* Added background for contrast */
+  }
+  
+  .info-box:hover {
+    /* box-shadow: 0 8px 12px rgba(255, 255, 255, 0.5); */
+  }
+  
+  .info-box h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #000000;
+  }
+  
+  .info-box p {
+    font-size: 1rem;
+  }
+  
+  .cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  .join-btn {
+    text-decoration: none;
+    background-color: #28a745;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+  }
+  
+  .join-btn:hover {
+    background-color: #218838;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .support-info {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .info-box {
+      width: 80%;
+      margin-bottom: 20px;
+    }
+  
+    .cta {
+      margin-top: 30px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.8rem;
+    }
+  
+    .info-box {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .info-box h2 {
+      font-size: 1.3rem;
+    }
+  
+    .info-box p {
+      font-size: 0.9rem;
+    }
+  
+    p {
+      font-size: 1rem;
+    }
+  
+    .join-btn {
+      padding: 10px 20px;
+      font-size: 1rem;
+    }
+  }
