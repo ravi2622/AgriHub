@@ -162,9 +162,9 @@
                                             <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
                                                 <label class="flex flex-col min-w-40 flex-1">
                                                     <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">
-                                                        <%= details.email %>
+                                                        Email
                                                     </p>
-                                                    <input placeholder="gagjisundariya@gmail.com"
+                                                    <input placeholder="<%= details.email %>"
                                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none h-14 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
                                                         value="" />
                                                 </label>
@@ -173,7 +173,7 @@
                                                 <label class="flex flex-col min-w-40 flex-1">
                                                     <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">
                                                         Phone Number</p>
-                                                    <input placeholder="99299939413"
+                                                    <input placeholder="<%= details.mobilenumber %>"
                                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none h-14 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
                                                         value="" />
                                                 </label>
@@ -182,7 +182,7 @@
                                                 <label class="flex flex-col min-w-40 flex-1">
                                                     <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">
                                                         Location</p>
-                                                    <input placeholder="padar na chede"
+                                                    <input placeholder="<%= details.location %>"
                                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none h-14 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
                                                         value="" />
                                                 </label>
@@ -190,26 +190,31 @@
                                             <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
                                                 <label class="flex flex-col min-w-40 flex-1">
                                                     <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">
-                                                        Location</p>
-                                                    <input placeholder="padar na chede"
+                                                        country</p>
+                                                    <input placeholder="<%= details.country %>"
                                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none h-14 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
                                                         value="" />
-                                                </label>
-                                            </div>
-                                            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-                                                <label class="flex flex-col min-w-40 flex-1">
-                                                    <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">
-                                                        sampark karo</p>
-                                                    <textarea
-                                                        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none min-h-36 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"></textarea>
                                                 </label>
                                             </div>
                                             <div class="flex px-4 py-3 justify-start">
-                                                <button
-                                                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#20df20] text-[#0e1b0e] text-sm font-bold leading-normal tracking-[0.015em]">
-                                                    <span class="truncate">Edit</span>
-                                                </button>
+                                                <a href="/profile/<%= currUser._id %>/edit">
+                                                    <button
+                                                        class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#20df20] text-[#0e1b0e] text-sm font-bold leading-normal tracking-[0.015em]">
+                                                        <span class="truncate">Edit</span>
+                                                    </button>
+                                                </a>
+                                                &nbsp;
+                                                <a href="/logout">
+                                                    <button
+                                                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[red] text-[#fff] text-sm font-bold leading-normal tracking-[0.015em]">
+                                                        <span class="truncate">Logout</span>
+                                                    </button>
+                                                </a>
                                             </div>
+
+                                            <!-- <form action="/logout"></form> -->
+                                            
+
                                         </div>
                                     </div>
                                     <% }; %>

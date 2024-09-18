@@ -129,14 +129,63 @@ app.post("/login", passport.authenticate("local", {
     res.redirect(redirectUrl);
 }));
 
-app.get("/profile", wrapAsync(async (req, res) => {
+app.get("/logout", (req, res) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        req.flash("success", "logged you out");
+        res.redirect("/home");
+    });
+});
+
+app.get("/profile/:id", wrapAsync(async (req, res) => {
+    let { id } = req.params;
 
     console.log(req.user.username);
-    
-    let profileDetails = await User.find({username: req.user.username});
+    let profileDetails = await User.find({ _id: req.user._id });
     console.log(profileDetails);
 
     res.render("./ProfilePage/profile.ejs", { profileDetails });
+}));
+
+app.get("/profile/:id/edit", wrapAsync(async (req, res) => {
+    let { id } = req.params;
+
+    // Fetch the user details based on the ID
+    let profileDetails = await User.findById(id);
+    console.log(profileDetails);
+
+    // Pass the fetched user data to the EJS template
+    res.render("./ProfilePage/edit.ejs", { profileDetails });
+}));
+
+
+app.put("/profile/:id", upload.single('data[profilepicture]'), wrapAsync(async (req, res) => {
+    // const userId = req.user._id;
+    const { userId } = req.params;
+
+    // If there is a new file (profile picture) uploaded
+    if (req.file) {
+        const url = req.file.path;
+        const filename = req.file.filename;
+
+        // Update profilepicture field with new URL and filename
+        await User.findByIdAndUpdate(userId, {
+            'profilepicture.url': url,
+            'profilepicture.filename': filename
+        });
+        console.log(`Updated profile picture URL: ${url}, filename: ${filename}`);
+    }
+
+    // Update other user data (from req.body)
+    if (req.body.data) {
+        await User.findByIdAndUpdate(userId, { ...req.body.data });
+        console.log(`Updated user data: ${JSON.stringify(req.body.data)}`);
+    }
+
+    // Redirect to profile page after update
+    res.redirect(`/profile/${userId}`);
 }));
 
 app.get("/home", (req, res) => {

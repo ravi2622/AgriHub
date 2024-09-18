@@ -123,13 +123,13 @@
         <% }; %>
 
         <% if(currUser && currUser.profilepicture && currUser.profilepicture.url) { %>
-            <a href="/profile">
+            <a href="/profile/<%= currUser._id %>">
                 <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
                     style='background-image: url("<%= currUser.profilepicture.url %>");'>
                 </div>
             </a>
         <% } else if(currUser && currUser.profilepicture && currUser.profilepicture.url) { %>
-            <a href="/profile">
+            <a href="/profile/<%= currUser._id %>">
                 <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
                     style='background-image: url("https://cdn.usegalileo.ai/stability/538af0aa-8d02-41f8-8570-9a8b19879943.png");'>
                 </div>
