@@ -114,7 +114,7 @@
                     </p>
                 </div>
                 <div class="swiper-slide">
-                    <div class="about-us">
+                    <!-- <div class="about-us">
                         <h1 class="heading">About Me</h1>
                         <h3 class="sub-heading">I'm Muzammal, <span class="proffesions">A Web Developer</span></h3>
                         <p class="aboutme-deatils">
@@ -174,7 +174,161 @@
                             </div>
                         </div>
                     </div>
+                </div> -->
+
+
+
+                <html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Public+Sans%3Awght%40400%3B500%3B700%3B900" />
+    <title>Galileo Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#f8fbf8] group/design-root overflow-x-hidden" style='font-family: "Public Sans", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e8f3e8] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#0e1b0e]">
+            <!-- <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-[#0e1b0e] text-lg font-bold leading-tight tracking-[-0.015em]">Farmers Market</h2> -->
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <!-- <a class="text-[#0e1b0e] text-sm font-medium leading-normal" href="#">Browse</a> -->
+              <a class="text-[#0e1b0e] text-sm font-medium leading-normal" href="#">Sell</a>
+              <a class="text-[#0e1b0e] text-sm font-medium leading-normal" href="#">Orders</a>
+              <a class="text-[#0e1b0e] text-sm font-medium leading-normal" href="#">Help</a>
+            </div>
+            <div class="flex gap-2">
+              <!-- <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#e8f3e8] text-[#0e1b0e] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5" >
+                <div class="text-[#0e1b0e]" data-icon="MagnifyingGlass" data-size="20px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+                    ></path>
+                  </svg>
                 </div>
+              </button>
+              <button
+                class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#e8f3e8] text-[#0e1b0e] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
+              >
+                <div class="text-[#0e1b0e]" data-icon="ShoppingCart" data-size="20px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"
+                    ></path>
+                  </svg>
+                </div>
+              </button> -->
+            </div>
+          </div>
+        </header>
+        <% for(details of profileDetails) { %>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex p-4 @container">
+              <div class="flex w-full flex-col gap-4 @[520px]:flex-row @[520px]:justify-between @[520px]:items-center">
+                <div class="flex gap-4">
+                  <div
+                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32"
+                    style='background-image: url("https://cdn.usegalileo.ai/sdxl10/5cdbbea3-9be9-4de5-bbb0-961e254a59ef.png");'
+                  ></div>
+                  <div class="flex flex-col justify-center">
+                    <p class="text-[#0e1b0e] text-[22px] font-bold leading-tight tracking-[-0.015em]">Lala Bhai ni vadi</p>
+                    <p class="text-[#509550] text-base font-normal leading-normal">details.email</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-[#0e1b0e] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Public Profile</h2>
+            <p class="text-[#0e1b0e] text-base font-normal leading-normal pb-3 pt-1 px-4">
+              Your public profile will be visible to buyers when they view your products. Buyers will also see the contact information you provide below.
+            </p>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">pratham nam</p>
+                <input
+                  placeholder="Gagji"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none h-14 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">antim nam</p>
+                <input
+                  placeholder="Sundariya"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none h-14 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">Email</p>
+                <input
+                  placeholder="gagjisundariya@gmail.com"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none h-14 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">Jagya</p>
+                <input
+                  placeholder="padar na chede"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none h-14 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">Phone Number</p>
+                <input
+                  placeholder="99299939413"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none h-14 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">sampark karo</p>
+                <textarea
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none min-h-36 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
+                ></textarea>
+              </label>
+            </div>
+            <div class="flex px-4 py-3 justify-start">
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#20df20] text-[#0e1b0e] text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Save Changes</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <% }; %>
+      </div>
+    </div>
+  </body>
+</html>
+                
+                
+                
                 <div class="swiper-slide services">
 
                     <h1 class="heading">Services</h1>

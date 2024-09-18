@@ -72,7 +72,6 @@ app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.currUser = req.user;
-    console.log(req.user);
 
     // console.log(res.locals.success);
     // console.log(res.locals.error);
@@ -100,8 +99,6 @@ app.post("/singup", upload.single('profilepicture'), singupSchemaValidation, wra
 
         const registeredUser = await User.register(newUser, password);
         console.log(registeredUser);
-
-        res.send("User registered successfully!");
 
         req.login(registeredUser, (err) => {
             if (err) {
@@ -132,9 +129,13 @@ app.post("/login", passport.authenticate("local", {
     res.redirect(redirectUrl);
 }));
 
-app.get("/profile", (req, res) => {
-    res.render("./ProfilePage/profile.ejs");
-});
+app.get("/profile", wrapAsync(async (req, res) => {
+
+    let profileDetails = await User.find();
+    console.log(profileDetails);
+
+    res.render("./ProfilePage/profile.ejs", profileDetails);
+}));
 
 app.get("/home", (req, res) => {
     res.render("./HomePage/home.ejs");

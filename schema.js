@@ -8,6 +8,9 @@ const singupSchemaValidation = Joi.object({
     role: Joi.string().valid('farmer', 'retailer').default('farmer'),
     location: Joi.string().required(),
     country: Joi.string().required(),
+    profilepicture: Joi.object({
+        url: Joi.string().required(),
+    }).required(),
 });
 
 module.exports = { singupSchemaValidation };
