@@ -131,10 +131,12 @@ app.post("/login", passport.authenticate("local", {
 
 app.get("/profile", wrapAsync(async (req, res) => {
 
-    let profileDetails = await User.find();
+    console.log(req.user.username);
+    
+    let profileDetails = await User.find({username: req.user.username});
     console.log(profileDetails);
 
-    res.render("./ProfilePage/profile.ejs", profileDetails);
+    res.render("./ProfilePage/profile.ejs", { profileDetails });
 }));
 
 app.get("/home", (req, res) => {
