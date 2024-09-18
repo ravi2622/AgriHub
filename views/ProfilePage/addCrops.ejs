@@ -1,0 +1,69 @@
+<body style="font-family: Arial, sans-serif; background-color: white; color: #333; padding: 20px;">
+
+    <div class="container" style="max-width: 600px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); border: 1px solid #e0e0e0;">
+        <h2 style="text-align: center; color: #006400;">Crop Details Form</h2>
+        <form action="/crop" method="POST" enctype="multipart/form-data">
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="name" style="display: block; color: #006400; margin-bottom: 5px;">Crop Name</label>
+                <input type="text" id="name" name="name" required style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="variety" style="display: block; color: #006400; margin-bottom: 5px;">Variety</label>
+                <input type="text" id="variety" name="variety" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="plantedDate" style="display: block; color: #006400; margin-bottom: 5px;">Planted Date</label>
+                <input type="date" id="plantedDate" name="plantedDate" required style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="harvestDate" style="display: block; color: #006400; margin-bottom: 5px;">Harvest Date</label>
+                <input type="date" id="harvestDate" name="harvestDate" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="quantity" style="display: block; color: #006400; margin-bottom: 5px;">Quantity</label>
+                <input type="number" id="quantity" name="quantity" step="0.01" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="unit" style="display: block; color: #006400; margin-bottom: 5px;">Unit</label>
+                <select id="unit" name="unit" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
+                    <option value="kg">kg</option>
+                    <option value="liters">liters</option>
+                    <option value="units">units</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="description" style="display: block; color: #006400; margin-bottom: 5px;">Description</label>
+                <textarea id="description" name="description" rows="4" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="image" style="display: block; color: #006400; margin-bottom: 5px;">Upload Image</label>
+                <input type="file" id="image" name="image" accept="image/*" style="width: 96%; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="price" style="display: block; color: #006400; margin-bottom: 5px;">Price</label>
+                <input type="number" id="price" name="price" step="0.01" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="location" style="display: block; color: #006400; margin-bottom: 5px;">Location</label>
+                <input type="text" id="location" name="location" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="country" style="display: block; color: #006400; margin-bottom: 5px;">Country</label>
+                <input type="text" id="country" name="country" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+
+            <button type="submit" style="width: 100%; padding: 10px; background-color: #006400; color: white; border: none; border-radius: 5px; cursor: pointer;">Submit</button>
+        </form>
+    </div>
+
+</body>

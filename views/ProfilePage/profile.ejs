@@ -46,8 +46,8 @@
                             <li onclick="Navigate(0)" class="activeLink"><i class="fa-solid fa-user"></i>
                                 <p>profile</p>
                             </li>
-                            <li onclick="Navigate(1)"><i class="fa-solid fa-house"></i>
-                                <p>About Me</p>
+                            <li onclick="Navigate(1)"><i class="fa-solid fa-circle-plus"></i>
+                                <p>Add Crops</p>
                             </li>
                             <!-- <li onclick="Navigate(2)"><i class="fa-solid fa-list"></i>
                                 <p>Services</p>
@@ -226,68 +226,72 @@
                     </div>
                     <div class="swiper-slide">
                         <div class="about-us">
-                            <h1 class="heading">About Me</h1>
-                            <h3 class="sub-heading">I'm Muzammal, <span class="proffesions">A Web Developer</span></h3>
-                            <p class="aboutme-deatils">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit iure, iste debitis unde
-                                maiores earum, ipsam quaerat quo magni sunt nisi at ullam nostrum pariatur soluta
-                                mollitia
-                                omnis consectetur qui similique doloribus vitae sit est in modi. Officia libero, animi
-                                repellendus debitis labore ipsa exercitationem ut ex. Natus ullam officiis qui fuga
-                                optio
-                                incidunt, ipsum atque ducimus quas ad eveniet nulla sit consectetur velit inventore
-                                possimus
-                                quae provident, repudiandae eaque sed quos mollitia omnis error. Hic animi porro
-                                asperiores
-                                ratione voluptatibus commodi, architecto officia nobis ducimus sint, placeat enim? Ab
-                                obcaecati ad provident et possimus. Ullam ipsa laborum sint autem!
-                            </p>
-                            <div class="about-me-divison">
-                                <div class="about-me-table">
-                                    <li><span>Experience:</span> 5+ years</li>
-                                    <li><span>Country:</span> Pakistan</li>
-                                    <li><span>Avability:</span> 24/7 </li>
-                                    <li><span>Satisfied Clients:</span>200+</li>
-                                    <li><span>Age</span>:20</li>
-                                    <li><span>Phone</span>:123-456-7890</li>
-                                    <li><span>Language Used:</span>HTML</li>
-                                    <li><span>Degree</span>:CS</li>
-                                    <div class="buttonGroup"><button>Hire Me</button><button>Contact Me</button></div>
-                                </div>
-
-                                <div class="skill-bar">
-                                    <li>
-                                        <p>HTML</p>
-                                        <div class="bar">
-                                            <div class="active-bar" style="width:99%"></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <p>CSS</p>
-                                        <div class="bar">
-                                            <div class="active-bar" style="width:80%"></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <p>JavaScript</p>
-                                        <div class="bar">
-                                            <div class="active-bar" style="width:85%"></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <p>Python</p>
-                                        <div class="bar">
-                                            <div class="active-bar" style="width:50%"></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <p>Django</p>
-                                        <div class="bar">
-                                            <div class="active-bar" style="width:60%"></div>
-                                        </div>
-                                    </li>
-                                </div>
+                            <div class="container" style="max-width: 600px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); border: 1px solid #e0e0e0;">
+                                <h2 style="text-align: center; color: #006400;">Crop Details Form</h2>
+                                <form action="/profile/<%= currUser._id %>/addcrops" method="POST" enctype="multipart/form-data">
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label for="name" style="display: block; color: #006400; margin-bottom: 5px;">Crop Name</label>
+                                        <input type="text" id="name" name="cropdata[name]" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required>
+                                    </div>
+                        
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label for="variety" style="display: block; color: #006400; margin-bottom: 5px;">Variety</label>
+                                        <input type="text" id="variety" name="cropdata[variety]" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required>
+                                    </div>
+                        
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label for="plantedDate" style="display: block; color: #006400; margin-bottom: 5px;">Planted Date</label>
+                                        <input type="date" id="plantedDate" name="cropdata[plantedDate]" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required>
+                                    </div>
+                        
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label for="harvestDate" style="display: block; color: #006400; margin-bottom: 5px;">Harvest Date</label>
+                                        <input type="date" id="harvestDate" name="cropdata[harvestDate]" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required>
+                                    </div>
+                        
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label for="quantity" style="display: block; color: #006400; margin-bottom: 5px;">Quantity</label>
+                                        <input type="number" id="quantity" name="cropdata[quantity]" step="0.01" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required>
+                                    </div>
+                        
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label for="unit" style="display: block; color: #006400; margin-bottom: 5px;">Unit</label>
+                                        <select id="unit" name="cropdata[unit]" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required>
+                                            <option value="kg">kg</option>
+                                            <option value="liters">liters</option>
+                                            <option value="units">units</option>
+                                        </select>
+                                    </div>
+                        
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label for="description" style="display: block; color: #006400; margin-bottom: 5px;">Description</label>
+                                        <textarea id="description" name="cropdata[description]" rows="4" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required></textarea>
+                                    </div>
+                        
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label for="image" style="display: block; color: #006400; margin-bottom: 5px;">Upload Image</label>
+                                        <input type="file" id="image" name="cropdata[image]" accept="image/*" style="width: 96%; padding: 5px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required>
+                                    </div>
+                        
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label for="price" style="display: block; color: #006400; margin-bottom: 5px;">Price</label>
+                                        <input type="number" id="price" name="cropdata[price]" step="0.01" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required>
+                                    </div>
+                        
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label for="location" style="display: block; color: #006400; margin-bottom: 5px;">Location</label>
+                                        <input type="text" id="location" name="cropdata[location]" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required>
+                                    </div>
+                        
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label for="country" style="display: block; color: #006400; margin-bottom: 5px;">Country</label>
+                                        <input type="text" id="country" name="cropdata[country]" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required>
+                                    </div>
+                        
+                                    <button type="submit" style="width: 100%; padding: 10px; background-color: #006400; color: white; border: none; border-radius: 5px; cursor: pointer;">Submit</button>
+                                </form>
                             </div>
+                        
                         </div>
                     </div>
                     <!-- <div class="swiper-slide services"> -->

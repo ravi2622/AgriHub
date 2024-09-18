@@ -10,10 +10,11 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const User = require("./models/user.js");
 const cropsListing = require("./models/cropsListing.js");
+const Crop = require("./models/crop.js");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
-const { singupSchemaValidation } = require("./middleware.js");
+const { singupSchemaValidation, cropValidationSchema } = require("./middleware.js");
 const multer = require('multer');
 const { storage } = require("./cloudConfig.js");
 const upload = multer({ storage });
@@ -187,6 +188,32 @@ app.put("/profile/:id", upload.single('data[profilepicture]'), wrapAsync(async (
     // Redirect to profile page after update
     res.redirect(`/profile/${userId}`);
 }));
+
+app.post("/profile/:id/addcrops", upload.single('cropdata[image]'), cropValidationSchema, wrapAsync(async (req, res) => {
+
+    console.log(req.body.cropdata);
+    let url = req.file ? req.file.path : '';
+    let filename = req.file ? req.file.filename : '';
+    console.log(url, "..", filename);
+    let newCropListing = new Crop(req.body.cropdata);
+    if (url) {
+        newCropListing.image = { url, filename };
+    }
+    newCropListing.owner = req.user._id;
+
+    console.log(newCropListing);
+
+    // Save the crop to MongoDB
+    newCropListing.save().then(res => {
+        console.log(res);
+    }).catch(err => {
+        console.log(err);
+    });
+
+    // Redirect or respond after successful submission
+    res.redirect(`/profile/${req.params.id}`);
+}));
+
 
 app.get("/home", (req, res) => {
     res.render("./HomePage/home.ejs");
