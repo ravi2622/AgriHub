@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link rel="stylesheet" href="/styles/singup.css">
+          <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+          <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Public+Sans%3Awght%40400%3B500%3B700%3B900" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+          <link rel="stylesheet" href="/styles/rating.css">
+          <link rel="stylesheet" href="/styles/footer.css">
+          <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+          <title>AgriHub | Connecting farmers to retailers</title>
+          <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+      
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+      
+          <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+      </head>
+<body class="bg-gray-50 text-gray-800">
+
+    <%- include("../includes/navbar.ejs") %>
+
+    <!-- Product Details Section -->
+    <main class="container mx-auto px-4 py-8">
+        <h2 class="text-3xl font-semibold"><%= product.name %></h2>
+        <p class="text-lg text-gray-600">₹<%= product.price %> per kg</p>
+
+        <div class="mt-4">
+            <a href="/profile/<%= farmer._id %>">
+            <div class="flex items-center space-x-4" style="display: flex; justify-content: center; align-items: center;">
+                <h1 class="text-sm font-medium" style="text-align: center;">By Farmer: <%= farmer.username %>'s Farm</h1>
+            </div>            
+            <div class="flex items-center space-x-4 mt-4"> <!-- Added mt-4 for spacing -->
+                <img src="<%= farmer.profilepicture.url %>" alt="<%= farmer.username %>'s Farm" class="w-24 h-24 rounded-full">
+                <div>
+                    <h4 class="text-sm font-bold"><%= farmer.username %>'s Farm</h4>
+                    <p class="text-xs text-gray-500">location <b><%= farmer.location %></b></p>
+                </div>
+            </div>
+            </a>
+        </div>
+
+        <!-- Product Info -->
+        <div class="mt-6">
+            <h4 class="font-semibold">Product Details</h4>
+            <div class="grid grid-cols-2 gap-4 text-sm" style="border: 2px solid black; padding: 2rem; border-radius: 0.5rem; background-color: rgb(161, 221, 161);">
+                <div>
+                    <p class="text-gray-500">Type</p>
+                    <p><%= product.croptype %></p>
+                </div>
+                <div>
+                    <p class="text-gray-500">Season</p>
+                    <p><%= crop.season %></p>
+                </div>
+                <div>
+                    <p class="text-gray-500">Planted Date</p>
+                    <p><%= product.plantedDate %></p>
+                </div>
+                <div>
+                    <p class="text-gray-500">Harvest Date</p>
+                    <p><%= product.harvestDate %></p>
+                </div>
+                <div>
+                    <p class="text-gray-500">Description</p>
+                    <p><%= product.quantity %> <%= product.description %></p>
+                </div>
+                <div>
+                    <p class="text-gray-500">Quantity</p>
+                    <p><%= product.quantity %> <%= product.unit %></p>
+                </div>
+                <div>
+                    <p class="text-gray-500">Product Image</p>
+                    <div class="mt-6">
+                        <img src="<%= product.image.url %>" alt="<%= product.name %>">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact and Add to Cart -->
+        <div class="mt-8 flex space-x-4">
+            <button class="bg-gray-100 text-gray-800 py-2 px-4 rounded">Contact Farmer</button>
+            <button class="bg-green-700 text-white py-2 px-4 rounded">Add to Cart</button>
+        </div>
+
+        <!-- Reviews -->
+        <section class="mt-8">
+            
+            <h1 style="text-align: center;">Review System</h1>
+            <h2 style="text-align: center;">Average Rating: <span id="avg-rating"><%= avgRating %></span></h2>
+
+            <h3 style="text-align: center;">Number of Ratings:</h3>
+            <ul style="list-style-type: none; padding: 0; text-align: center;">
+              <li style="background-color: #f9f9f9; margin: 10px 0; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: inline-block; width: 80%; text-align: left;">
+                5 stars: <span style="font-weight: bold;" id="five-star-count"><%= ratingCounts[5] %></span>
+              </li>
+              <li style="background-color: #f9f9f9; margin: 10px 0; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: inline-block; width: 80%; text-align: left;">
+                4 stars: <span style="font-weight: bold;" id="four-star-count"><%= ratingCounts[4] %></span>
+              </li>
+              <li style="background-color: #f9f9f9; margin: 10px 0; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: inline-block; width: 80%; text-align: left;">
+                3 stars: <span style="font-weight: bold;" id="three-star-count"><%= ratingCounts[3] %></span>
+              </li>
+              <li style="background-color: #f9f9f9; margin: 10px 0; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: inline-block; width: 80%; text-align: left;">
+                2 stars: <span style="font-weight: bold;" id="two-star-count"><%= ratingCounts[2] %></span>
+              </li>
+              <li style="background-color: #f9f9f9; margin: 10px 0; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: inline-block; width: 80%; text-align: left;">
+                1 star: <span style="font-weight: bold;" id="one-star-count"><%= ratingCounts[1] %></span>
+              </li>
+            </ul>
+        
+            <div class="review-form" style="text-align: center; margin: 20px 0;">
+              <h3 style="text-align: center;">Add a review</h3>
+              <form action="/cropslisting/<%= crop.id %>/<%= crop.name %>/<%= product.id %>/submitreview" method="POST">
+                <div class="mb-3 mt-3">
+                  <label for="rating" class="form-label">Rating</label>
+                  <fieldset class="starability-slot">
+                    <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="rating" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="rating" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="rating" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="rating" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="rating" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                  </fieldset>       
+                </div>
+              
+                <textarea name="comment" id="comment" placeholder="Add your review here..." rows="4" cols="50" 
+                  style="width: 80%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; font-size: 1em;">
+                </textarea><br>
+                <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1em;">Submit</button>
+              </form>              
+            </div>
+        
+            <div class="review-list" style="text-align: center;">
+              <h3 style="text-align: center;">Reviews:</h3>
+              <ul id="review-list" style="list-style-type: none; padding: 0;">
+                <% reviews.forEach(function(review) { %>
+                  <li style="background-color: #f9f9f9; margin: 10px 0; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: inline-block; width: 80%; text-align: left;">
+                    Rating: <%= review.rating %> stars - <%= review.comment %>
+                  </li>
+                <% }) %>
+              </ul>
+            </div>
+        </section>
+
+        <!-- Similar Products -->
+        <section class="mt-12">
+            <h4 class="font-semibold">Similar Products</h4>
+            <div class="grid grid-cols-4 gap-4 mt-4">
+                <% similarProducts.forEach(product => { %>
+                <a href="/cropslisting/<%= crop._id %>/<%= crop.name %>/<%= product._id %>">
+                    <div class="bg-white shadow p-4 rounded-lg text-center">
+                        <img src="<%= product.image.url %>" alt="<%= product.name %>" class="w-full h-24 object-cover mb-2">
+                        <h5 class="font-semibold"><%= product.name %></h5>
+                        <p class="text-sm text-gray-500">₹<%= product.price %> per kg</p>
+                    </div>
+                </a>
+                <% }); %>
+            </div>
+        </section>
+    </main>
+
+    <%- include("../includes/footer.ejs") %>
+    
+</body>
+</html>

@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const singupSchemaValidation = Joi.object({
+const signupSchema = Joi.object({
     username: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
@@ -10,11 +10,10 @@ const singupSchemaValidation = Joi.object({
     country: Joi.string().required(),
 });
 
-module.exports = { singupSchemaValidation };
-
-const cropValidationSchema = Joi.object({
+const validateCrop = Joi.object({
     cropdata: Joi.object({
         name: Joi.string().required(),
+        croptype: Joi.string().required(),
         variety: Joi.string().optional(),
         plantedDate: Joi.date().iso().required(),
         harvestDate: Joi.date().iso().required(),
@@ -28,4 +27,11 @@ const cropValidationSchema = Joi.object({
     }).required()
 });
 
-module.exports = { cropValidationSchema };
+const reviewSchema = Joi.object({
+        comment: Joi.string().required(),
+        rating: Joi.number().required().min(1).max(5),
+        createdAt: Joi.date(),
+});
+
+// Export both schemas together
+module.exports = { signupSchema, validateCrop, reviewSchema };

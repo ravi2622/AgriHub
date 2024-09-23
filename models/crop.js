@@ -9,6 +9,10 @@ const cropSchema = Schema({
         type: String,
         required: true,
     },
+    croptype: {
+        type: String,
+        required: true,
+    },
     variety: {
         type: String,
     },

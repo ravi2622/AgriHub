@@ -11,10 +11,12 @@ const methodOverride = require("method-override");
 const User = require("./models/user.js");
 const cropsListing = require("./models/cropsListing.js");
 const Crop = require("./models/crop.js");
+const Review = require('./models/review.js');
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
+const calculateAvgRating = require("./utils/calculateAvgRating.js");
 const ExpressError = require("./utils/ExpressError.js");
-const { singupSchemaValidation, cropValidationSchema } = require("./middleware.js");
+const { validateSignup, validateCrop, validatereview } = require("./middleware.js");
 const multer = require('multer');
 const { storage } = require("./cloudConfig.js");
 const upload = multer({ storage });
@@ -22,6 +24,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const bodyParser = require('body-parser');
 
 main().then(res => console.log("Connecstion Successful"))
     .catch(err => console.log(err));
@@ -42,7 +45,8 @@ app.engine("ejs", ejsMate);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json());  // For parsing JSON payloads
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 app.get("/", (req, res) => {
@@ -80,12 +84,11 @@ app.use((req, res, next) => {
     next();
 });
 
-// Remove or correct this route
-app.get("/singup", (req, res) => {
+app.get("/signup", (req, res) => {
     res.render("./user/singup.ejs");
 });
 
-app.post("/singup", upload.single('profilepicture'), singupSchemaValidation, wrapAsync(async (req, res) => {
+app.post("/signup", upload.single('profilepicture'), validateSignup, wrapAsync(async (req, res) => {
     try {
         const { username, email, password, mobilenumber, role, location, country } = req.body;
         console.log(req.body);
@@ -123,32 +126,40 @@ app.get("/login", (req, res) => {
 app.post("/login", passport.authenticate("local", {
     failureRedirect: "/login",
     failureFlash: true
-}), wrapAsync(async (req, res) => {
-    console.log(req.user);
-    req.flash("success", "Welcome to Wanderlust! You are logged in!");
-    let redirectUrl = "/home";
-    res.redirect(redirectUrl);
+}), wrapAsync(async (req, res, next) => { // Added 'next'
+    try {
+        console.log(req.user);
+        req.flash("success", "Welcome to Wanderlust! You are logged in!");
+        let redirectUrl = "/home";
+        res.redirect(redirectUrl);
+    } catch (err) {
+        next(err); // If any error occurs, it will be passed to the error handler middleware
+    }
 }));
 
-app.get("/logout", (req, res) => {
+
+app.get("/logout", (req, res, next) => { // Added 'next'
     req.logout((err) => {
         if (err) {
-            return next(err);
+            return next(err); // Ensure 'next' is available for handling errors
         }
-        req.flash("success", "logged you out");
+        req.flash("success", "Logged you out");
         res.redirect("/home");
     });
 });
 
-app.get("/profile/:id", wrapAsync(async (req, res) => {
+app.get("/profile/:id", async (req, res) => {
     let { id } = req.params;
 
-    console.log(req.user.username);
-    let profileDetails = await User.find({ _id: req.user._id });
+    console.log(`this is a user name :===== ${req.user.username}`);
+    let profileDetails = await User.findById(id);
     console.log(profileDetails);
 
-    res.render("./ProfilePage/profile.ejs", { profileDetails });
-}));
+    let userCrops = await User.findById(id).populate("addcroplisting");
+    console.log(userCrops);
+
+    res.render("./ProfilePage/profile.ejs", { profileDetails, userCrops });
+});
 
 app.get("/profile/:id/edit", wrapAsync(async (req, res) => {
     let { id } = req.params;
@@ -189,25 +200,59 @@ app.put("/profile/:id", upload.single('data[profilepicture]'), wrapAsync(async (
     res.redirect(`/profile/${userId}`);
 }));
 
-app.post("/profile/:id/addcrops", upload.single('cropdata[image]'), cropValidationSchema, wrapAsync(async (req, res) => {
-
+app.post("/profile/:id/addcrops", upload.single('cropdata[image]'), validateCrop, wrapAsync(async (req, res) => {
     console.log(req.body.cropdata);
+
     let url = req.file ? req.file.path : '';
     let filename = req.file ? req.file.filename : '';
     console.log(url, "..", filename);
+
     let newCropListing = new Crop(req.body.cropdata);
+
     if (url) {
         newCropListing.image = { url, filename };
     }
+
+    // Set the owner of the crop listing
     newCropListing.owner = req.user._id;
 
-    console.log(newCropListing);
+    // Find crop listing based on crop name
+    let croplisting = await cropsListing.find({ name: req.body.cropdata.name });
 
-    // Save the crop to MongoDB
-    newCropListing.save().then(res => {
-        console.log(res);
+    if (croplisting.length > 0) {
+        // If croplisting is found, add the new crop to the listing
+        croplisting.forEach(async function (el) {
+            el.addcroplisting.push(newCropListing);
+
+            // Save each individual croplisting document
+            await el.save().then(res => {
+                console.log('Updated croplisting:', res);
+            }).catch(err => {
+                console.log('Error updating croplisting:', err);
+            });
+        });
+    } else {
+        // If no croplisting is found
+        console.log('No croplisting found');
+    }
+
+    // Save the new crop listing to MongoDB
+    await newCropListing.save().then(async savedCrop => {
+        console.log('New crop listing saved:', savedCrop);
+
+        // Now, add the saved crop's ID to the user's `addcroplisting` array
+        const user = await User.findById(req.user._id);
+
+        if (user) {
+            user.addcroplisting.push(savedCrop._id); // Add the crop ID to the user's crop listing array
+            await user.save().then(updatedUser => {
+                console.log('User updated with new crop:', updatedUser);
+            }).catch(err => {
+                console.log('Error updating user with new crop:', err);
+            });
+        }
     }).catch(err => {
-        console.log(err);
+        console.log('Error saving new crop listing:', err);
     });
 
     // Redirect or respond after successful submission
@@ -215,8 +260,11 @@ app.post("/profile/:id/addcrops", upload.single('cropdata[image]'), cropValidati
 }));
 
 
-app.get("/home", (req, res) => {
-    res.render("./HomePage/home.ejs");
+app.get("/home", async (req, res) => {
+    let cropCount = await cropsListing.countDocuments();
+    console.log(cropCount);
+
+    res.render("./HomePage/home.ejs", { cropCount });
 });
 
 app.get("/cropslisting", async (req, res) => {
@@ -228,6 +276,95 @@ app.get("/cropslisting", async (req, res) => {
 
     res.render("./listings/listing.ejs", { kharifCrops, RabiCrops, CashCrops, ZaidCrops });
 });
+
+
+app.get("/cropslisting/:id/:name", wrapAsync(async (req, res) => {
+    const { id, name } = req.params;
+
+    console.log(`ID: ${id}, Name: ${name}`);
+
+    // Find the crop listing by its ID and populate the related crops
+    const croplisting = await cropsListing.findById(id).populate("addcroplisting");
+
+    // Check if the crop listing or the populated crops exist
+    if (!croplisting || croplisting.addcroplisting.length === 0) {
+        req.flash("error", "Listing does not exist!");
+        return res.redirect("/cropslisting");
+    }
+
+    // Find specific crop by name (if necessary, else crop might be unused)
+    const crop = await Crop.findOne({ name });
+
+    console.log("Addcroplisting:", croplisting);
+
+    // Render the page with the found listing
+    return res.render("./listings/individual.ejs", { croplisting });
+}));
+
+app.get("/cropslisting/:id/:name/:cropId", wrapAsync(async (req, res) => {
+    let { id, cropId, name } = req.params;
+
+    let product = await Crop.findById(cropId);
+    console.log(product);
+    let crop = await cropsListing.findById(id);
+    console.log(crop);
+    let farmer = await User.findById(product.owner);
+    let similarProducts = await Crop.find({ name: name });
+
+    console.log(farmer);
+
+    const reviews = await Review.find(); // Fetch all reviews from MongoDB
+    console.log(reviews);
+    const avgRating = await calculateAvgRating();
+    console.log(avgRating);
+    const ratingCounts = {
+        5: await Review.countDocuments({ rating: 5 }),
+        4: await Review.countDocuments({ rating: 4 }),
+        3: await Review.countDocuments({ rating: 3 }),
+        2: await Review.countDocuments({ rating: 2 }),
+        1: await Review.countDocuments({ rating: 1 })
+      };
+
+    res.render("./listings/show.ejs", { crop, product, farmer, similarProducts, avgRating, ratingCounts, reviews });
+}));
+
+app.post('/cropslisting/:id/:name/:cropId/submitreview', validatereview, async (req, res) => {
+    const { id, name, cropId } = req.params;
+    let crop = await Crop.findById(cropId);
+    const rating = parseInt(req.body.rating);
+    console.log(rating);
+    const comment = req.body.comment;
+    console.log(comment);
+  
+    // Save the review to MongoDB
+    const newReview = new Review({ rating, comment });
+    newReview.author = req.user._id;
+
+    console.log(newReview);
+    console.log("this is a crop listing := ", crop);
+
+    crop.reviews.push(newReview);
+
+    await newReview.save().then(res => { console.log(res) }).catch(err => { console.log(err) });
+    await crop.save().catch(err => { console.log(err) });
+
+    console.log("new review save!");
+    req.flash("success", "New Review Created!");
+  
+    // Redirect back to the main page
+    res.redirect(`/cropslisting/${id}/${name}/${cropId}`);
+});
+
+// module.exports.destroyReview = async (req, res) => {
+//     let { id, reviewsId } = req.params;
+
+//     await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewsId } }).then(res => { console.log(res) }).catch(err => { console.log(err) });
+//     await Review.findByIdAndDelete(reviewsId);
+
+//     req.flash("success", "Successfuly Review Deleted!");
+
+//     res.redirect(`/listings/${id}`);
+// };
 
 app.all("*", (req, res, next) => {
     console.log("new error!");

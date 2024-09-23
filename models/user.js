@@ -19,6 +19,7 @@ const userShema = new Schema({
   createdAt: { type: Date, default: Date.now },
   location: { type: String, required: true, },
   country: { type: String, required: true, },
+  addcroplisting: [{ type: Schema.Types.ObjectId, ref: "Crop", }],
 });
 
 userShema.plugin(passportLocalMongoose);

@@ -49,10 +49,10 @@
                             <li onclick="Navigate(1)"><i class="fa-solid fa-circle-plus"></i>
                                 <p>Add Crops</p>
                             </li>
-                            <!-- <li onclick="Navigate(2)"><i class="fa-solid fa-list"></i>
-                                <p>Services</p>
+                            <li onclick="Navigate(2)"><i class="fa-solid fa-list"></i>
+                                <p>List Of Crops</p>
                             </li>
-                            <li onclick="Navigate(3)"><i class="fa-solid fa-images"></i>
+                            <!-- <li onclick="Navigate(3)"><i class="fa-solid fa-images"></i>
                                 <p>Gallery</p>
                             </li>
                             <li onclick="Navigate(4)"><i class="fa-solid fa-comments"></i>
@@ -126,7 +126,7 @@
                                         </div>
                                     </div>
                                 </header>
-                                <% for(details of profileDetails) { %>
+
                                     <div class="px-40 flex flex-1 justify-center py-5">
                                         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                                             <div class="flex p-4 @container">
@@ -134,16 +134,16 @@
                                                     class="flex w-full flex-col gap-4 @[520px]:flex-row @[520px]:justify-between @[520px]:items-center">
                                                     <div class="flex gap-4">
                                                         <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32"
-                                                            style='background-image: url("<%= details.profilepicture.url %>");'>
+                                                            style='background-image: url("<%= profileDetails.profilepicture.url %>");'>
                                                         </div>
                                                         <div class="flex flex-col justify-center">
                                                             <p
                                                                 class="text-[#0e1b0e] text-[22px] font-bold leading-tight tracking-[-0.015em]">
-                                                                <%= details.username %>
+                                                                <%= profileDetails.username %>
                                                             </p>
                                                             <p
                                                                 class="text-[#509550] text-base font-normal leading-normal">
-                                                                <%= details.email %>
+                                                                <%= profileDetails.email %>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -151,7 +151,7 @@
                                             </div>
                                             <h2
                                                 class="text-[#0e1b0e] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
-                                                <%= details.role %> Profile
+                                                <%= profileDetails.role %> Profile
                                             </h2>
                                             <p
                                                 class="text-[#0e1b0e] text-base font-normal leading-normal pb-3 pt-1 px-4">
@@ -164,7 +164,7 @@
                                                     <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">
                                                         Email
                                                     </p>
-                                                    <input placeholder="<%= details.email %>"
+                                                    <input placeholder="<%= profileDetails.email %>"
                                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none h-14 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
                                                         value="" />
                                                 </label>
@@ -173,7 +173,7 @@
                                                 <label class="flex flex-col min-w-40 flex-1">
                                                     <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">
                                                         Phone Number</p>
-                                                    <input placeholder="<%= details.mobilenumber %>"
+                                                    <input placeholder="<%= profileDetails.mobilenumber %>"
                                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none h-14 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
                                                         value="" />
                                                 </label>
@@ -182,7 +182,7 @@
                                                 <label class="flex flex-col min-w-40 flex-1">
                                                     <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">
                                                         Location</p>
-                                                    <input placeholder="<%= details.location %>"
+                                                    <input placeholder="<%= profileDetails.location %>"
                                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none h-14 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
                                                         value="" />
                                                 </label>
@@ -191,7 +191,7 @@
                                                 <label class="flex flex-col min-w-40 flex-1">
                                                     <p class="text-[#0e1b0e] text-base font-medium leading-normal pb-2">
                                                         country</p>
-                                                    <input placeholder="<%= details.country %>"
+                                                    <input placeholder="<%= profileDetails.country %>"
                                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] focus:outline-0 focus:ring-0 border-none bg-[#e8f3e8] focus:border-none h-14 placeholder:text-[#509550] p-4 text-base font-normal leading-normal"
                                                         value="" />
                                                 </label>
@@ -217,7 +217,7 @@
 
                                         </div>
                                     </div>
-                                    <% }; %>
+         
                             </div>
                         </div>
 
@@ -229,9 +229,17 @@
                             <div class="container" style="max-width: 600px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); border: 1px solid #e0e0e0;">
                                 <h2 style="text-align: center; color: #006400;">Crop Details Form</h2>
                                 <form action="/profile/<%= currUser._id %>/addcrops" method="POST" enctype="multipart/form-data">
+
                                     <div class="form-group" style="margin-bottom: 15px;">
-                                        <label for="name" style="display: block; color: #006400; margin-bottom: 5px;">Crop Name</label>
-                                        <input type="text" id="name" name="cropdata[name]" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required>
+                                        <label for="name" style="display: block; color: #006400; margin-bottom: 5px;">Select Crop</label>
+                                        <select id="name" name="cropdata[name]" style="width: 96%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required>
+                                          <option value="">Select Crop</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label for="croptype" style="display: block; color: #006400; margin-bottom: 5px;"> Crop Type </label>
+                                        <input type="text" id="croptype" name="cropdata[croptype]" style="width: 96%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; color: black !important;" required>
                                     </div>
                         
                                     <div class="form-group" style="margin-bottom: 15px;">
@@ -294,6 +302,51 @@
                         
                         </div>
                     </div>
+
+
+
+
+                    <div class="swiper-slide">
+                        <div class="about-us">
+                            <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-hidden" style='font-family: "Public Sans", "Noto Sans", sans-serif; border-radius: 20px !important;'>
+                                <div class="layout-container flex h-full grow flex-col">
+                                  <h2 class="text-[#111811] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">List of User Crops</h2>
+                                  <hr>
+                              
+                                  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+                                    <% if (userCrops.addcroplisting && userCrops.addcroplisting.length > 0) { %>
+                                      <% userCrops.addcroplisting.forEach(crop => { %>
+                                        <div class="flex flex-col gap-3 pb-3" style="cursor: pointer; min-width: 200px;">
+                                          <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg">
+                                            <img class="w-full h-full object-cover rounded-lg" src="<%= crop.image.url %>" alt="<%= crop.name %>">
+                                          </div>
+                                          <p class="text-[#111811] text-base font-medium leading-normal">
+                                            <%= crop.name %> <br> <%= crop.croptype %>
+                                          </p>
+                                        </div>
+                                      <% }) %>
+                                    <% } else { %>
+                                      <p class="text-center col-span-4 text-gray-500">No crops available</p>
+                                    <% } %>
+                                  </div>
+                              
+                                  <hr>
+                              
+                                  <div class="flex px-4 py-3 justify-center">
+                                    <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f0f4f0] text-[#111811] text-sm font-bold leading-normal tracking-[0.015em]">
+                                      <span class="truncate">Show More</span>
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                        </div>
+                      </div>
+                      
+                    
+                    
+                    
+                    
                     <!-- <div class="swiper-slide services"> -->
 <!--  -->
                         <!-- <h1 class="heading">Services</h1> -->

@@ -1,0 +1,70 @@
+
+<% layout("./layouts/boilerplateHome") %>
+
+<body>
+  <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+    style='font-family: "Public Sans", "Noto Sans", sans-serif;'>
+    <div class="layout-container flex h-full grow flex-col">
+      
+      <div class="px-40 flex flex-1 justify-center py-5">
+        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+          <div class="px-4 py-3">
+            <label class="flex flex-col min-w-40 h-12 w-full">
+              <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                <div
+                  class="text-[#638863] flex border-none bg-[#f0f4f0] items-center justify-center pl-4 rounded-l-lg border-r-0"
+                  data-icon="MagnifyingGlass" data-size="24px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
+                    viewBox="0 0 256 256">
+                    <path
+                      d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z">
+                    </path>
+                  </svg>
+                </div>
+                <input placeholder="Search for produce"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111811] focus:outline-0 focus:ring-0 border-none bg-[#f0f4f0] focus:border-none h-full placeholder:text-[#638863] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                  value="" />
+              </div>
+            </label>
+          </div>
+
+                    
+          <h2 class="text-[#111811] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">List of Similar Crops </h2>
+          <hr>
+          
+          <% for(crops of croplisting.addcroplisting) {%>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-4">
+            
+            <a href="/cropslisting/<%= croplisting._id %>/<%= croplisting.name %>/<%= crops._id %>">
+              <div class="flex flex-col gap-3 pb-3" style="cursor: pointer;"></div>
+                <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg">
+                  <img class="w-full h-full object-cover rounded-lg" src="<%= crops.image.url %>" alt="<%= crops.name %>">
+                </div>
+                <p class="text-[#111811] text-base font-medium leading-normal">
+                  <%= crops.name %> <br> <%= crops.croptype %>
+                </p>
+              </div>
+            </a>
+            
+          </div>
+          
+
+          <% }; %>
+
+
+          <hr>
+
+          <div class="flex px-4 py-3 justify-center">
+            <button
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f0f4f0] text-[#111811] text-sm font-bold leading-normal tracking-[0.015em]">
+              <span class="truncate">Show More</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+ 
